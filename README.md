@@ -1,3 +1,7 @@
+<h3 align="center">
+  <img src="assets/diffie_hellman_icon_web.png" width="300">
+</h3>
+
 # Diffie-Hellman Key Exchange
 
 ## About
