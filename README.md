@@ -4,6 +4,8 @@
 
 # Diffie-Hellman Key Exchange
 
+Swift implementation of classic cryptographic key exchange method.
+
 ## About
 Diffie-Hellman Key Exchange allow parties to jointly establish a secure private key without sharing it in any way ([Forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy)) and then use it for a symmetric key cipher. 
 
