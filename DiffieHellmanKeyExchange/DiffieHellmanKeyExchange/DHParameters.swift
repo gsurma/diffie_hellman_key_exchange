@@ -8,19 +8,27 @@
 
 import Foundation
 
+struct DHDefaultParameters {
+    static let modulus = 23
+    static let base = 5
+}
+
 struct DHParameters {
-    var modulus: Int = 23 // p = prime
-    var base: Int = 5 // g = primitive root modulo of p
+    var modulus: Int = DHDefaultParameters.modulus // p = safe prime
+    var base: Int = DHDefaultParameters.base // g = primitive root modulo of p
     
     init() {
         var p: Int = 0
         var q: Int = 0
-        while !isPrime(p) {
-            q = generateRandomPrime()
+        
+        // We choose p so that p=2q+1, where q is also prime
+        while !p.isPrime() {
+            q = Int().generateRandomPrime()
             p = (2 * q) + 1
         }
         modulus = p
         
+        // Than we look for the smallest possible x until x,x2,xk≢1(modp)
         for x in 1...p where
                 x % p != 1
                 && (x^^2) % p != 1
@@ -28,26 +36,6 @@ struct DHParameters {
                     base = x
                     break
         }
-    }
-    
-    private func generateRandomPrime(upperBound: Int = 50) -> Int {
-        var eratosthenesSieve = Array.init(repeating: true, count: upperBound+1)
-        var primes = [Int]()
-        eratosthenesSieve[0] = false
-        eratosthenesSieve[1] = false
-        for i in 2...upperBound where eratosthenesSieve[i] == true {
-            var j = i*i
-            while j <= upperBound {
-                eratosthenesSieve[j] = false
-                j += i
-            }
-            primes.append(i)
-        }
-        return primes[Int(arc4random_uniform(UInt32(primes.count)))]
-    }
-
-    func isPrime(_ number: Int) -> Bool {
-        return number > 1 && !(2..<number).contains { number % $0 == 0 }
+        print("Generated DHParameters. Modulus is \(modulus) (safe prime) and base is \(base) (primitive root modulo of modulus) \n")
     }
 }
-
