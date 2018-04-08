@@ -15,14 +15,14 @@ final class Person {
     
     init(commonPublicComponent: DHParameters) {
         self.commonPublicComponent = commonPublicComponent
-        self.privateSecretKey = Int(arc4random())
+        self.privateSecretKey = Int(arc4random_uniform(10))
     }
     
     func generatePublicKey() -> Int {
-        return commonPublicComponent.base ^ privateSecretKey % commonPublicComponent.modulus
+        return commonPublicComponent.base ^^ privateSecretKey % commonPublicComponent.modulus
     }
     
     func computeComputeCommonSecretKey(peerKey: Int) -> Int {
-        return peerKey ^ privateSecretKey % commonPublicComponent.modulus
+        return peerKey ^^ privateSecretKey % commonPublicComponent.modulus
     }
 }

@@ -9,15 +9,28 @@
 import Foundation
 
 struct DHParameters {
-    var modulus: Int = 23 // prime
-    var base: Int = 5 // primitive root modulo of ^^
+    var modulus: Int = 23 // p = prime
+    var base: Int = 5 // g = primitive root modulo of p
     
     init() {
-        modulus = generateRandomPrime()
-        base = getPrimitiveRootModuloFor(n: modulus)
+        var p: Int = 0
+        var q: Int = 0
+        while !isPrime(p) {
+            q = generateRandomPrime()
+            p = (2 * q) + 1
+        }
+        modulus = p
+        
+        for x in 1...p where
+                x % p != 1
+                && (x^^2) % p != 1
+                && (x^^q) % p != 1 {
+                    base = x
+                    break
+        }
     }
     
-    private func generateRandomPrime(upperBound: Int = 100000) -> Int {
+    private func generateRandomPrime(upperBound: Int = 50) -> Int {
         var eratosthenesSieve = Array.init(repeating: true, count: upperBound+1)
         var primes = [Int]()
         eratosthenesSieve[0] = false
@@ -32,12 +45,7 @@ struct DHParameters {
         }
         return primes[Int(arc4random_uniform(UInt32(primes.count)))]
     }
-    
-    private func getPrimitiveRootModuloFor(n: Int) -> Int {
-        // TODO:
-        return 5
-    }
-    
+
     func isPrime(_ number: Int) -> Bool {
         return number > 1 && !(2..<number).contains { number % $0 == 0 }
     }
