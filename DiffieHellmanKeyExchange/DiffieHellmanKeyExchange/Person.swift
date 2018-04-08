@@ -19,10 +19,10 @@ final class Person {
     }
     
     func generatePublicKey() -> Int {
-        return commonPublicComponent.base ^^ privateSecretKey % commonPublicComponent.modulus
+        return commonPublicComponent.g ^^ privateSecretKey % commonPublicComponent.p
     }
     
     func computeComputeCommonSecretKey(peerKey: Int) -> Int {
-        return peerKey ^^ privateSecretKey % commonPublicComponent.modulus
+        return peerKey ^^ privateSecretKey % commonPublicComponent.p
     }
 }

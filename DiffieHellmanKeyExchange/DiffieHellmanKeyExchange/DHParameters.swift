@@ -9,33 +9,33 @@
 import Foundation
 
 struct DHDefaultParameters {
-    static let modulus = 23
-    static let base = 5
+    static let p = 23
+    static let g = 5
 }
 
 struct DHParameters {
-    var modulus: Int = DHDefaultParameters.modulus // p = safe prime
-    var base: Int = DHDefaultParameters.base // g = primitive root modulo of p
+    var p: Int = DHDefaultParameters.p // p = safe prime
+    var g: Int = DHDefaultParameters.g // g = primitive root modulo of p
     
     init() {
-        var p: Int = 0
-        var q: Int = 0
+        var _p: Int = 0
+        var _q: Int = 0
         
         // We choose p so that p=2q+1, where q is also prime
-        while !p.isPrime() {
-            q = Int().generateRandomPrime()
-            p = (2 * q) + 1
+        while !_p.isPrime() {
+            _q = Int().generateRandomPrime()
+            _p = (2 * _q) + 1
         }
-        modulus = p
+        p = _p
         
         // Than we look for the smallest possible x until x,x2,xk≢1(modp)
         for x in 1...p where
                 x % p != 1
                 && (x^^2) % p != 1
-                && (x^^q) % p != 1 {
-                    base = x
+                && (x^^_q) % p != 1 {
+                    g = x
                     break
         }
-        print("Generated DHParameters. Modulus is \(modulus) (safe prime) and base is \(base) (primitive root modulo of modulus) \n")
+        print("Generated DHParameters. P is \(p) (safe prime) and g is \(g) (primitive root modulo of modulus) \n")
     }
 }
