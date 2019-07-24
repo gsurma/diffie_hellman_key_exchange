@@ -31,3 +31,18 @@ This protocol is considered secure (check disclaimer), because it's relatively h
 ### Disclaimer
 Don't use it in a production environment. Generated keys are very small (Int64) thus making them easily breakable.
 Use already generated [RFC primes](https://www.ietf.org/rfc/rfc3526.txt), but even them [may not be strong enough](https://arstechnica.com/information-technology/2015/10/how-the-nsa-can-break-trillions-of-encrypted-web-and-vpn-connections/).
+
+## Author
+
+**Greg (Grzegorz) Surma**
+
+[**PORTFOLIO**](https://gsurma.github.io)
+
+[**GITHUB**](https://github.com/gsurma)
+
+[**BLOG**](https://medium.com/@gsurma)
+
+<a href="https://www.paypal.com/paypalme2/grzegorzsurma115">
+  <img alt="Support via PayPal" src="https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg"/>
+</a>
+
